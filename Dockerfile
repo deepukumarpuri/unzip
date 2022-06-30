@@ -1,12 +1,11 @@
-FROM python:3.10-slim-buster
+FROM archlinux:latest
 
-RUN apt update && apt upgrade -y
-RUN apt install git -y
-COPY requirements.txt /requirements.txt
-
-RUN cd /
-RUN pip3 install -U pip && pip3 install -U -r requirements.txt
-RUN mkdir /unzip
-WORKDIR /unzip
-COPY start.sh /start.sh
-CMD ["/bin/bash", "/start.sh"]
+RUN pacman -Syyu --noconfirm
+RUN pacman -S --noconfirm python-pip zstd p7zip gcc
+RUN pip3 install -U pip
+RUN mkdir /app/
+WORKDIR /app/
+COPY . /app/
+RUN pip3 install -U setuptools
+RUN pip3 install -U -r requirements.txt
+CMD bash start.sh
