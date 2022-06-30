@@ -1,5 +1,7 @@
 version: "3.9"
 endpoints:
+  annotations:
+    dev.okteto.com/private: "true"
 services:
   worker:
     build: .
