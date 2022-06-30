@@ -3,7 +3,7 @@ endpoints:
   annotations:
     dev.okteto.com/private: "true"
 services:
-  worker:
+  web:
     build: .
     environment:
       REDIS_URI: $REDIS_URI
